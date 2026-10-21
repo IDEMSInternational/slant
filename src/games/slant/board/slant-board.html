@@ -1,0 +1,64 @@
+@let s = state();
+
+<svg
+  #svg
+  class="board-svg"
+  role="img"
+  [attr.aria-label]="'Slant puzzle, ' + s.w + ' by ' + s.h"
+  [attr.viewBox]="viewBox()"
+  (pointerdown)="onPointerDown($event)"
+  (pointermove)="onPointerMove($event)"
+  (pointerup)="onPointerUp($event)"
+  (pointercancel)="cancelStroke()"
+  (contextmenu)="$event.preventDefault()"
+>
+  <rect class="board-paper" x="0" y="0" [attr.width]="s.w" [attr.height]="s.h" rx="0.15" />
+
+  @for (l of gridLines(); track $index) {
+    <line class="board-grid" [attr.x1]="l.x1" [attr.y1]="l.y1" [attr.x2]="l.x2" [attr.y2]="l.y2" />
+  }
+
+  @if (hintView(); as h) {
+    @for (q of h.squares; track $index) {
+      <rect class="board-hint" [attr.x]="q.x + 0.06" [attr.y]="q.y + 0.06" width="0.88" height="0.88" rx="0.15" />
+    }
+  }
+
+  @for (l of lines(); track $index) {
+    <line
+      class="slash"
+      [class.dotted]="l.dotted"
+      [style.--line]="'var(--tile-' + l.colour + '-edge)'"
+      [attr.x1]="l.x1" [attr.y1]="l.y1" [attr.x2]="l.x2" [attr.y2]="l.y2" />
+  }
+
+  @for (l of pendingLines(); track $index) {
+    <line class="slash pending" [class.dotted]="l.dotted" [attr.x1]="l.x1" [attr.y1]="l.y1" [attr.x2]="l.x2" [attr.y2]="l.y2" />
+  }
+
+  @for (c of clues(); track $index) {
+    <g class="clue">
+      <circle [attr.cx]="c.x" [attr.cy]="c.y" r="0.27" />
+      <text [attr.x]="c.x" [attr.y]="c.y + 0.02">{{ c.value }}</text>
+    </g>
+  }
+
+  @if (hintView(); as h) {
+    @if (!pending().length) {
+      @if (h.path) {
+        <circle class="board-finger" r="0.22">
+          <animateMotion [attr.path]="h.path" dur="2s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.2;0.8;1" calcMode="linear" />
+        </circle>
+      } @else if (h.centre) {
+        <circle class="board-finger tap" [attr.cx]="h.centre.x" [attr.cy]="h.centre.y" r="0.22" />
+      }
+    }
+  }
+
+  @if (noteLabel(); as label) {
+    <g class="board-label note" role="status">
+      <rect [attr.x]="label.x" [attr.y]="label.y" [attr.width]="label.width" [attr.height]="label.height" [attr.rx]="label.height / 2" />
+      <text [attr.x]="label.x + label.width / 2" [attr.y]="label.y + label.height / 2 + 0.02">{{ label.text }}</text>
+    </g>
+  }
+</svg>

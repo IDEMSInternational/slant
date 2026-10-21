@@ -1,0 +1,21 @@
+@if (tutorial(); as t) {
+  <puzzle-tutorial [controls]="t" (skip)="endTutorial()">
+    <slant-board [state]="t.state()" [hint]="t.hint()" (move)="t.move($event)" />
+  </puzzle-tutorial>
+} @else {
+  <puzzle-shell [controls]="session" (help)="startTutorial()">
+    <slant-board [state]="session.state()" [thinking]="thinking()" (move)="session.move($event)" />
+
+    <div puzzleTools class="thinking">
+      <label class="switch">
+        <input type="checkbox" role="switch" [checked]="thinking()" (change)="thinking.set(!thinking())" />
+        <span class="track" aria-hidden="true"></span>
+        Thinking
+      </label>
+      @if (thinking() || hasThoughts()) {
+        <button type="button" (click)="resolveThoughts(true)" [disabled]="!hasThoughts()">Keep</button>
+        <button type="button" (click)="resolveThoughts(false)" [disabled]="!hasThoughts()">Discard</button>
+      }
+    </div>
+  </puzzle-shell>
+}
