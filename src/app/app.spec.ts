@@ -22,6 +22,7 @@ describe('App', () => {
     expect(element.querySelector('h1')?.textContent).toContain('How to play Slant');
     expect(element.querySelector('slant-board svg')).toBeTruthy();
     expect(element.querySelectorAll('.clue').length).toBe(6);
+    expect(element.querySelector('puzzle-splash img')?.getAttribute('src')).toBe('studio/idems-games-logo.jpg');
   });
 
   it('continues the game after a reload, dotted lines and Solve included', () => {
