@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { hasSeenTutorial, markTutorialSeen } from '@studio/container/first-run';
 import { PuzzleShell } from '@studio/container/puzzle-shell/puzzle-shell';
+import { PuzzleSwitch } from '@studio/container/puzzle-switch/puzzle-switch';
 import { PuzzleTutorial } from '@studio/container/puzzle-tutorial/puzzle-tutorial';
 import { SessionStore } from '@studio/container/session-store';
 import { TutorialStore } from '@studio/container/tutorial-store';
@@ -10,7 +11,7 @@ import { slantTutorial } from '../games/slant/tutorial';
 
 @Component({
   selector: 'app-root',
-  imports: [PuzzleShell, PuzzleTutorial, SlantBoard],
+  imports: [PuzzleShell, PuzzleSwitch, PuzzleTutorial, SlantBoard],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

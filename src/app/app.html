@@ -7,11 +7,9 @@
     <slant-board [state]="session.state()" [thinking]="thinking()" (move)="session.move($event)" />
 
     <div puzzleTools class="thinking">
-      <label class="switch">
-        <input type="checkbox" role="switch" [checked]="thinking()" (change)="thinking.set(!thinking())" />
-        <span class="track" aria-hidden="true"></span>
+      <puzzle-switch [(checked)]="thinking" description="Swipes draw dotted lines, to try out an idea">
         Thinking
-      </label>
+      </puzzle-switch>
       @if (thinking() || hasThoughts()) {
         <button type="button" (click)="resolveThoughts(true)" [disabled]="!hasThoughts()">Keep</button>
         <button type="button" (click)="resolveThoughts(false)" [disabled]="!hasThoughts()">Discard</button>
