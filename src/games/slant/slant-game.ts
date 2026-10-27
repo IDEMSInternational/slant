@@ -55,6 +55,7 @@ export const slantGame: PuzzleGame<SlantParams, SlantState, SlantMove> = {
 
   applyMove,
   isCompleted: (state) => state.completed,
+  canShowMistakes: true,
 
   solve(initial, solution) {
     if (solution) {

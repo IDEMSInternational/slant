@@ -28,6 +28,7 @@
     <line
       class="slash"
       [class.dotted]="l.dotted"
+      [class.wrong]="l.wrong"
       [style.--line]="'var(--tile-' + l.colour + '-edge)'"
       [attr.x1]="l.x1" [attr.y1]="l.y1" [attr.x2]="l.x2" [attr.y2]="l.y2" />
   }
@@ -37,7 +38,7 @@
   }
 
   @for (c of clues(); track $index) {
-    <g class="clue">
+    <g class="clue" [class.wrong]="c.wrong">
       <circle [attr.cx]="c.x" [attr.cy]="c.y" r="0.27" />
       <text [attr.x]="c.x" [attr.y]="c.y + 0.02">{{ c.value }}</text>
     </g>

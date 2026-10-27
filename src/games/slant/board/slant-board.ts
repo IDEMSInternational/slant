@@ -14,6 +14,7 @@ import { SlantHint } from '../hint';
 import { Point, SlantStroke } from '../input';
 import { SlantMove, SquareChange } from '../moves';
 import { SlantState } from '../state';
+import { findMistakes } from '../mistakes';
 import { LineColours } from './line-colours';
 
 interface Segment {
@@ -41,6 +42,8 @@ export class SlantBoard {
   readonly hint = input<SlantHint | null>(null);
   /** Thinking mode: swipes draw dotted, tentative lines. */
   readonly thinking = input(false);
+  /** Show mistakes: lines on closed loops, and numbers that can't be satisfied, in red. */
+  readonly showMistakes = input(false);
   readonly move = output<SlantMove>();
 
   private readonly svg = viewChild.required<ElementRef<SVGSVGElement>>('svg');
@@ -64,6 +67,8 @@ export class SlantBoard {
   private readonly colours = new LineColours(LINE_COLOURS);
   private coloursFor: Int8Array | null = null;
 
+  private readonly mistakes = computed(() => (this.showMistakes() ? findMistakes(this.state()) : null));
+
   protected readonly lines = computed(() => {
     const state = this.state();
     if (state.clues !== this.coloursFor) {
@@ -71,11 +76,12 @@ export class SlantBoard {
       this.coloursFor = state.clues;
     }
     const colours = this.colours.coloursFor(state, state.slashes);
-    const lines: (Segment & { colour: number; dotted: boolean })[] = [];
+    const loops = this.mistakes()?.loopSquares;
+    const lines: (Segment & { colour: number; dotted: boolean; wrong: boolean })[] = [];
     state.slashes.forEach((slash, i) => {
       if (slash === EMPTY) return;
       const segment = slashSegment(i % state.w, Math.floor(i / state.w), slash);
-      lines.push({ ...segment, colour: colours[i], dotted: state.tentative[i] === 1 });
+      lines.push({ ...segment, colour: colours[i], dotted: state.tentative[i] === 1, wrong: loops?.[i] === 1 });
     });
     return lines;
   });
@@ -86,9 +92,12 @@ export class SlantBoard {
 
   protected readonly clues = computed(() => {
     const { w, clues } = this.state();
-    const list: { x: number; y: number; value: number }[] = [];
+    const bad = this.mistakes()?.badClues;
+    const list: { x: number; y: number; value: number; wrong: boolean }[] = [];
     clues.forEach((value, i) => {
-      if (value !== NO_CLUE) list.push({ x: i % (w + 1), y: Math.floor(i / (w + 1)), value });
+      if (value !== NO_CLUE) {
+        list.push({ x: i % (w + 1), y: Math.floor(i / (w + 1)), value, wrong: bad?.[i] === 1 });
+      }
     });
     return list;
   });

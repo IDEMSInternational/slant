@@ -19,6 +19,11 @@
     stroke: var(--accent);
     opacity: 0.6;
   }
+
+  // "Show mistakes": this line is part of a closed loop.
+  &.wrong {
+    stroke: var(--danger);
+  }
 }
 
 .clue {
@@ -36,5 +41,17 @@
     text-anchor: middle;
     dominant-baseline: middle;
     fill: var(--ink);
+  }
+
+  // "Show mistakes": this number can no longer be satisfied.
+  &.wrong {
+    circle {
+      fill: var(--danger-soft);
+      stroke: var(--danger);
+    }
+
+    text {
+      fill: var(--danger);
+    }
   }
 }
