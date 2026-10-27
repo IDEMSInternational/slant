@@ -24,7 +24,7 @@ interface Segment {
   y2: number;
 }
 
-/** Number of tile colours defined in the theme (--tile-0 ... --tile-5). */
+/** Number of line colours defined in slant-board.scss (--line-0 ... --line-5). */
 const LINE_COLOURS = 6;
 /** Space around the board for clues on its edge, in squares. */
 const MARGIN = 0.45;

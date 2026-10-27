@@ -1,6 +1,18 @@
 :host {
   display: block;
   width: 100%;
+
+  /*
+   * Colours for groups of connected lines. No reds, oranges or pinks:
+   * red is kept for "Show mistakes", so a loop must never be confused
+   * with the lines around it.
+   */
+  --line-0: #4a7fc1; // blue
+  --line-1: #2a9187; // teal
+  --line-2: #8062c4; // purple
+  --line-3: #b08f1f; // mustard
+  --line-4: #6b9a2e; // olive
+  --line-5: #5d6b7a; // slate
 }
 
 .slash {
