@@ -46,7 +46,9 @@
   // "Show mistakes": this number can no longer be satisfied.
   &.wrong {
     circle {
-      fill: var(--danger-soft);
+      // Solid (not the translucent --danger-soft), so lines behind don't show through.
+      fill: var(--board);
+      fill: color-mix(in srgb, var(--danger) 14%, var(--board));
       stroke: var(--danger);
     }
 
