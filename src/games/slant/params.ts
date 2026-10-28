@@ -22,9 +22,10 @@ export function defaultParams(): SlantParams {
 }
 
 export function presets(): Preset<SlantParams>[] {
-  return [4, 5, 6, 7, 8, 9, 10].map((n) => ({
-    name: `${n}×${n}`,
-    params: { w: n, h: n, difficulty: EASY },
+  const sizes = [[5, 5], [6, 6], [7, 7], [8, 8], [10, 10], [10, 12]];
+  return sizes.map(([w, h]) => ({
+    name: `${w}×${h}`,
+    params: { w, h, difficulty: EASY },
   }));
 }
 

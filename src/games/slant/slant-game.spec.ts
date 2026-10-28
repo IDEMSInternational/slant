@@ -127,8 +127,8 @@ describe('Slant thinking mode', () => {
 });
 
 describe('Slant sizes and difficulty', () => {
-  it('offers 4×4 to 10×10 and Easy/Hard, and generates solvable puzzles', () => {
-    expect(game.presets().map((p) => p.name)).toEqual(['4×4', '5×5', '6×6', '7×7', '8×8', '9×9', '10×10']);
+  it('offers 5×5 to 10×12 and Easy/Hard, and generates solvable puzzles', () => {
+    expect(game.presets().map((p) => p.name)).toEqual(['5×5', '6×6', '7×7', '8×8', '10×10', '10×12']);
     expect(game.difficulties).toEqual(['Easy', 'Hard']);
     for (const text of ['4x4dh', '10x10dh', '15x15dh']) {
       const session = new GameSession(game, decodeParams(text));
