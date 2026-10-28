@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { hasSeenTutorial, markTutorialSeen } from '@studio/container/first-run';
+import { PuzzleNotice } from '@studio/container/puzzle-notice/puzzle-notice';
 import { PuzzleShell } from '@studio/container/puzzle-shell/puzzle-shell';
 import { PuzzleSplash } from '@studio/container/puzzle-splash/puzzle-splash';
 import { PuzzleSwitch } from '@studio/container/puzzle-switch/puzzle-switch';
@@ -12,12 +13,13 @@ import { slantTutorial } from '../games/slant/tutorial';
 
 @Component({
   selector: 'app-root',
-  imports: [PuzzleShell, PuzzleSplash, PuzzleSwitch, PuzzleTutorial, SlantBoard],
+  imports: [PuzzleNotice, PuzzleShell, PuzzleSplash, PuzzleSwitch, PuzzleTutorial, SlantBoard],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
+  protected readonly game = slantGame;
   protected readonly session = new SessionStore(slantGame);
   /** The tutorial in progress, if any. It runs automatically on first launch. */
   protected readonly tutorial = signal(hasSeenTutorial(slantGame.id) ? null : this.newTutorial());
