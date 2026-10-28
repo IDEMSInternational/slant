@@ -86,6 +86,14 @@ export class SlantBoard {
     return lines;
   });
 
+  /** Squares with a line in them (solid or dotted), shaded so the empty ones stand out. */
+  protected readonly filledSquares = computed(() => {
+    const { w, slashes } = this.state();
+    const squares: { x: number; y: number }[] = [];
+    slashes.forEach((slash, i) => slash !== EMPTY && squares.push({ x: i % w, y: Math.floor(i / w) }));
+    return squares;
+  });
+
   protected readonly pendingLines = computed(() =>
     this.pending().map(({ x, y, slash, tentative }) => ({ ...slashSegment(x, y, slash), dotted: !!tentative })),
   );

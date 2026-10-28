@@ -19,6 +19,12 @@
   --line-9: #93b532; // lime
 }
 
+// A square with a line in it: lightly shaded, so the empty squares stand out.
+.filled {
+  fill: color-mix(in srgb, var(--grid) 40%, var(--board));
+  pointer-events: none;
+}
+
 .slash {
   stroke: var(--line);
   stroke-width: 0.13;

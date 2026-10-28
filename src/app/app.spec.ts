@@ -25,6 +25,21 @@ describe('App', () => {
     expect(element.querySelector('puzzle-splash img')?.getAttribute('src')).toBe('studio/idems-games-logo.jpg');
   });
 
+  it('shades the squares that have a line in them, solid or dotted', async () => {
+    localStorage.setItem('slant.tutorialSeen', '1'); // straight to the game
+    const fixture = TestBed.createComponent(App);
+    const session = sessionOf(fixture.componentInstance);
+    await fixture.whenStable();
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelectorAll('slant-board .filled').length).toBe(0);
+
+    session.move({ kind: 'set', changes: [{ x: 0, y: 0, slash: 1 }] });
+    session.move({ kind: 'set', changes: [{ x: 1, y: 0, slash: 1, tentative: true }] });
+    await fixture.whenStable();
+    const shaded = Array.from(element.querySelectorAll('slant-board .filled'), (r) => r.getAttribute('x'));
+    expect(shaded).toEqual(['0.03', '1.03']);
+  });
+
   it('continues the game after a reload, dotted lines and Solve included', () => {
     const first = sessionOf(TestBed.createComponent(App).componentInstance);
     first.move({ kind: 'set', changes: [{ x: 0, y: 0, slash: 1, tentative: true }] });
