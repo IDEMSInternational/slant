@@ -7,13 +7,14 @@ import { App } from './app';
 describe('App', () => {
   beforeEach(async () => {
     localStorage.clear();
+    history.replaceState(null, ''); // the home page
     await TestBed.configureTestingModule({
       imports: [App],
     }).compileComponents();
   });
 
   const sessionOf = (app: App) =>
-    (app as unknown as { session: SessionStore<unknown, SlantState, SlantMove> }).session;
+    (app as unknown as { screens: { session: SessionStore<unknown, SlantState, SlantMove> } }).screens.session;
 
   it('starts with the tutorial: a Slant board inside the shared tutorial frame', async () => {
     const fixture = TestBed.createComponent(App);
@@ -26,9 +27,10 @@ describe('App', () => {
   });
 
   it('shades the squares that have a line in them, solid or dotted', async () => {
-    localStorage.setItem('slant.tutorialSeen', '1'); // straight to the game
+    localStorage.setItem('slant.tutorialSeen', '1'); // straight to the home page
     const fixture = TestBed.createComponent(App);
     const session = sessionOf(fixture.componentInstance);
+    (fixture.componentInstance as unknown as { screens: { openFreePlay(): void } }).screens.openFreePlay();
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
     expect(element.querySelectorAll('slant-board .filled').length).toBe(0);

@@ -1,3 +1,4 @@
+import { DailySchedule } from '@studio/engine/daily';
 import { CustomField, Preset } from '@studio/engine/puzzle-game';
 
 export const EASY = 0;
@@ -28,6 +29,25 @@ export function presets(): Preset<SlantParams>[] {
     params: { w, h, difficulty: EASY },
   }));
 }
+
+/**
+ * The daily puzzles: the three largest sizes, Easy from Monday to
+ * Wednesday and Hard from Thursday, ending with 10×12 Hard on Sunday.
+ * Changing this changes the daily puzzles for everyone (see daily.ts in
+ * the engine).
+ */
+export const daily: DailySchedule<SlantParams> = {
+  firstDay: '2026-10-26',
+  week: [
+    { w: 8, h: 8, difficulty: EASY },
+    { w: 10, h: 10, difficulty: EASY },
+    { w: 10, h: 12, difficulty: EASY },
+    { w: 8, h: 8, difficulty: HARD },
+    { w: 10, h: 10, difficulty: HARD },
+    { w: 10, h: 10, difficulty: HARD },
+    { w: 10, h: 12, difficulty: HARD },
+  ],
+};
 
 /** Text form, compatible with the original: "8x8de", "10x10dh". */
 export function encodeParams(params: SlantParams): string {

@@ -8,6 +8,7 @@ import {
   SlantParams,
   customFields,
   customParams,
+  daily,
   decodeParams,
   defaultParams,
   encodeParams,
@@ -56,6 +57,7 @@ export const slantGame: PuzzleGame<SlantParams, SlantState, SlantMove> = {
   applyMove,
   isCompleted: (state) => state.completed,
   canShowMistakes: true,
+  daily,
 
   solve(initial, solution) {
     if (solution) {
