@@ -1,6 +1,6 @@
 {
   "name": "slant",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Slant: an IDEMS educational puzzle game (Angular + Capacitor).",
   "license": "MIT",
   "scripts": {
