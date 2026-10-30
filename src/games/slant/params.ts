@@ -37,7 +37,7 @@ export function presets(): Preset<SlantParams>[] {
  * the engine).
  */
 export const daily: DailySchedule<SlantParams> = {
-  firstDay: '2026-10-26',
+  firstDay: '2026-10-24',
   week: [
     { w: 8, h: 8, difficulty: EASY },
     { w: 10, h: 10, difficulty: EASY },
