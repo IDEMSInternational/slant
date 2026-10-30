@@ -11,6 +11,8 @@ import { SlantBoard } from '../games/slant/board/slant-board';
 import { slantGame } from '../games/slant/slant-game';
 import { slantTutorial } from '../games/slant/tutorial';
 
+import { version } from '../../package.json';
+
 @Component({
   selector: 'app-root',
   imports: [PuzzleNotice, PuzzleShell, PuzzleSplash, PuzzleSwitch, PuzzleTutorial, SlantBoard],
@@ -20,6 +22,7 @@ import { slantTutorial } from '../games/slant/tutorial';
 })
 export class App {
   protected readonly game = slantGame;
+  protected readonly version = version;
   protected readonly session = new SessionStore(slantGame);
   /** The tutorial in progress, if any. It runs automatically on first launch. */
   protected readonly tutorial = signal(hasSeenTutorial(slantGame.id) ? null : this.newTutorial());
