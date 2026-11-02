@@ -19,6 +19,20 @@
   --line-9: #93b532; // lime
 }
 
+/* The dark theme: the same colours, lighter, so every line stands out on the dark board. */
+:host-context([data-theme='dark']) {
+  --line-0: #6fa2e3; // blue
+  --line-1: #3fb5a8; // teal
+  --line-2: #a48ee3; // purple
+  --line-3: #d2b048; // mustard
+  --line-4: #8fbd4f; // olive
+  --line-5: #98a6b5; // slate
+  --line-6: #8692e6; // navy, lightened
+  --line-7: #55b67c; // forest green
+  --line-8: #62c0ee; // sky blue
+  --line-9: #b2d34e; // lime
+}
+
 // A square with a line in it: lightly shaded, so the empty squares stand out.
 .filled {
   fill: color-mix(in srgb, var(--grid) 40%, var(--board));
