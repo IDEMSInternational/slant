@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { SessionStore } from '@studio/container/session-store';
 import { SlantMove } from '../games/slant/moves';
 import { SlantState } from '../games/slant/state';
+import { slantGame } from '../games/slant/slant-game';
 import { App } from './app';
 
 describe('App', () => {
@@ -13,8 +14,11 @@ describe('App', () => {
     }).compileComponents();
   });
 
-  const sessionOf = (app: App) =>
-    (app as unknown as { screens: { session: SessionStore<unknown, SlantState, SlantMove> } }).screens.session;
+  /** A puzzle session as timed play keeps it (opening the app again: another one). */
+  const newSession = () =>
+    TestBed.runInInjectionContext(
+      () => new SessionStore<unknown, SlantState, SlantMove>(slantGame as never),
+    );
 
   it('starts with the tutorial: a Slant board inside the shared tutorial frame', async () => {
     const fixture = TestBed.createComponent(App);
@@ -29,8 +33,13 @@ describe('App', () => {
   it('shades the squares that have a line in them, solid or dotted', async () => {
     localStorage.setItem('slant.tutorialSeen', '1'); // straight to the home page
     const fixture = TestBed.createComponent(App);
-    const session = sessionOf(fixture.componentInstance);
-    (fixture.componentInstance as unknown as { screens: { openFreePlay(): void } }).screens.openFreePlay();
+    const screens = (
+      fixture.componentInstance as unknown as {
+        screens: { openTimed(): void; timed: { move(move: SlantMove): void } };
+      }
+    ).screens;
+    screens.openTimed();
+    const session = screens.timed;
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
     expect(element.querySelectorAll('slant-board .filled').length).toBe(0);
@@ -43,13 +52,13 @@ describe('App', () => {
   });
 
   it('continues the game after a reload, dotted lines and Solve included', () => {
-    const first = sessionOf(TestBed.createComponent(App).componentInstance);
+    const first = newSession();
     first.move({ kind: 'set', changes: [{ x: 0, y: 0, slash: 1, tentative: true }] });
     first.solve(); // a move holding an Int8Array
     const solved = Array.from(first.state().slashes);
     first.undo();
 
-    const second = sessionOf(TestBed.createComponent(App).componentInstance);
+    const second = newSession();
     expect(second.gameId()).toBe(first.gameId());
     expect(second.state().tentative[0]).toBe(1);
     second.redo();
