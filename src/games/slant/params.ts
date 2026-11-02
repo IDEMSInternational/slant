@@ -31,22 +31,18 @@ export function presets(): Preset<SlantParams>[] {
 }
 
 /**
- * The daily puzzles: the three largest sizes, Easy from Monday to
- * Wednesday and Hard from Thursday, ending with 10×12 Hard on Sunday.
- * Changing this changes the daily puzzles for everyone (see daily.ts in
- * the engine).
+ * The daily puzzles, at each level growing through the week: Low is small
+ * Easy puzzles (5×5 to 7×7), Medium larger Easy ones (8×8 to 10×12), and
+ * High Hard ones (6×6 to 10×12). Changing this changes the daily puzzles
+ * for everyone (see daily.ts in the engine).
  */
 export const daily: DailySchedule<SlantParams> = {
   firstDay: '2026-10-24',
-  week: [
-    { w: 8, h: 8, difficulty: EASY },
-    { w: 10, h: 10, difficulty: EASY },
-    { w: 10, h: 12, difficulty: EASY },
-    { w: 8, h: 8, difficulty: HARD },
-    { w: 10, h: 10, difficulty: HARD },
-    { w: 10, h: 10, difficulty: HARD },
-    { w: 10, h: 12, difficulty: HARD },
-  ],
+  levels: [
+    { difficulty: EASY, sizes: [[5, 5], [5, 5], [6, 6], [6, 6], [6, 6], [7, 7], [7, 7]] },
+    { difficulty: EASY, sizes: [[8, 8], [8, 8], [10, 10], [10, 10], [10, 10], [10, 12], [10, 12]] },
+    { difficulty: HARD, sizes: [[6, 6], [7, 7], [8, 8], [8, 8], [10, 10], [10, 10], [10, 12]] },
+  ].map(({ difficulty, sizes }) => sizes.map(([w, h]) => ({ w, h, difficulty }))),
 };
 
 /** Text form, compatible with the original: "8x8de", "10x10dh". */
