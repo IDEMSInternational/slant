@@ -31,9 +31,9 @@ export function presets(): Preset<SlantParams>[] {
 }
 
 /**
- * The daily puzzles, at each level growing through the week: Low is small
- * Easy puzzles (5×5 to 7×7), Medium larger Easy ones (8×8 to 10×12), and
- * High Hard ones (6×6 to 10×12). Changing this changes the daily puzzles
+ * The daily puzzles, at each level growing through the week: the Easy
+ * level is small Easy puzzles (5×5 to 7×7), Medium larger Easy ones (8×8
+ * to 10×12), and Hard is Hard puzzles (6×6 to 10×12). Changing this changes the daily puzzles
  * for everyone (see daily.ts in the engine).
  */
 export const daily: DailySchedule<SlantParams> = {
