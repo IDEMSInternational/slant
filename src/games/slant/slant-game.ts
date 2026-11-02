@@ -7,6 +7,7 @@ import {
   HARD,
   SlantParams,
   customFields,
+  beatTheClock,
   customParams,
   daily,
   decodeParams,
@@ -58,6 +59,7 @@ export const slantGame: PuzzleGame<SlantParams, SlantState, SlantMove> = {
   isCompleted: (state) => state.completed,
   canShowMistakes: true,
   daily,
+  beatTheClock,
 
   solve(initial, solution) {
     if (solution) {
