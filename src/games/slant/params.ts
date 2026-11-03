@@ -45,15 +45,6 @@ export const daily: DailySchedule<SlantParams> = {
   ].map(({ difficulty, sizes }) => sizes.map(([w, h]) => ({ w, h, difficulty }))),
 };
 
-/** Beat the clock: medium puzzles picked at random, larger Easy ones or small Hard ones. */
-export const beatTheClock: SlantParams[] = [
-  { w: 8, h: 8, difficulty: EASY },
-  { w: 10, h: 10, difficulty: EASY },
-  { w: 10, h: 12, difficulty: EASY },
-  { w: 5, h: 5, difficulty: HARD },
-  { w: 6, h: 6, difficulty: HARD },
-];
-
 /** Text form, compatible with the original: "8x8de", "10x10dh". */
 export function encodeParams(params: SlantParams): string {
   return `${params.w}x${params.h}d${DIFFICULTY_CODES[params.difficulty]}`;
