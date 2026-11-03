@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LEGAL_VERSION } from '@studio/container/legal';
 import { PuzzleScreens } from '@studio/container/puzzle-screens';
 import { SlantMove } from '../games/slant/moves';
 import { SlantParams } from '../games/slant/params';
@@ -15,7 +16,7 @@ describe('Ladder (Slant)', () => {
 
   beforeEach(async () => {
     localStorage.clear();
-    localStorage.setItem('slant.noticeSeen', '2026-10-28');
+    localStorage.setItem('slant.noticeSeen', LEGAL_VERSION);
     localStorage.setItem('slant.tutorialSeen', '1');
     history.replaceState(null, '');
     await TestBed.configureTestingModule({ imports: [App] }).compileComponents();
