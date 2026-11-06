@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Slant</string>
     <string name="title_activity_main">Slant</string>
-    <string name="package_name">international.idems.slant</string>
-    <string name="custom_url_scheme">international.idems.slant</string>
+    <string name="package_name">international.idems.games.slant</string>
+    <string name="custom_url_scheme">international.idems.games.slant</string>
 </resources>
