@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "slant": {
+    "slanted": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -66,10 +66,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "slant:build:production"
+              "buildTarget": "slanted:build:production"
             },
             "development": {
-              "buildTarget": "slant:build:development"
+              "buildTarget": "slanted:build:development"
             }
           },
           "defaultConfiguration": "development"

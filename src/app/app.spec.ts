@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { SessionStore } from '@studio/container/session-store';
-import { SlantMove } from '../games/slant/moves';
-import { SlantState } from '../games/slant/state';
-import { slantGame } from '../games/slant/slant-game';
+import { SlantedMove } from '../games/slanted/moves';
+import { SlantedState } from '../games/slanted/state';
+import { slantedGame } from '../games/slanted/slanted-game';
 import { App } from './app';
 
 describe('App', () => {
@@ -17,37 +17,37 @@ describe('App', () => {
   /** A puzzle session as timed play keeps it (opening the app again: another one). */
   const newSession = () =>
     TestBed.runInInjectionContext(
-      () => new SessionStore<unknown, SlantState, SlantMove>(slantGame as never),
+      () => new SessionStore<unknown, SlantedState, SlantedMove>(slantedGame as never),
     );
 
-  it('starts with the tutorial: a Slant board inside the shared tutorial frame', async () => {
+  it('starts with the tutorial: a Slanted board inside the shared tutorial frame', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
-    expect(element.querySelector('h1')?.textContent).toContain('How to play Slant');
-    expect(element.querySelector('slant-board svg')).toBeTruthy();
+    expect(element.querySelector('h1')?.textContent).toContain('How to play Slanted');
+    expect(element.querySelector('slanted-board svg')).toBeTruthy();
     expect(element.querySelectorAll('.clue').length).toBe(6);
     expect(element.querySelector('puzzle-splash img')?.getAttribute('src')).toBe('studio/idems-games-logo.jpg');
   });
 
   it('shades the squares that have a line in them, solid or dotted', async () => {
-    localStorage.setItem('slant.tutorialSeen', '1'); // straight to the home page
+    localStorage.setItem('slanted.tutorialSeen', '1'); // straight to the home page
     const fixture = TestBed.createComponent(App);
     const screens = (
       fixture.componentInstance as unknown as {
-        screens: { openTimed(): void; timed: { move(move: SlantMove): void } };
+        screens: { openTimed(): void; timed: { move(move: SlantedMove): void } };
       }
     ).screens;
     screens.openTimed();
     const session = screens.timed;
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
-    expect(element.querySelectorAll('slant-board .filled').length).toBe(0);
+    expect(element.querySelectorAll('slanted-board .filled').length).toBe(0);
 
     session.move({ kind: 'set', changes: [{ x: 0, y: 0, slash: 1 }] });
     session.move({ kind: 'set', changes: [{ x: 1, y: 0, slash: 1, tentative: true }] });
     await fixture.whenStable();
-    const shaded = Array.from(element.querySelectorAll('slant-board .filled'), (r) => r.getAttribute('x'));
+    const shaded = Array.from(element.querySelectorAll('slanted-board .filled'), (r) => r.getAttribute('x'));
     expect(shaded).toEqual(['0.03', '1.03']);
   });
 

@@ -1,9 +1,9 @@
 import { Tutorial, TutorialStep } from '@studio/engine/tutorial';
 import { BACKSLASH, EMPTY, FORWARD, Slash } from './grid';
-import { SlantHint } from './hint';
-import { SlantMove, SquareChange } from './moves';
-import { EASY, SlantParams } from './params';
-import { SlantState } from './state';
+import { SlantedHint } from './hint';
+import { SlantedMove, SquareChange } from './moves';
+import { EASY, SlantedParams } from './params';
+import { SlantedState } from './state';
 
 /**
  * The tutorial puzzle (4×4, unique solution). Clues sit on grid points:
@@ -17,10 +17,10 @@ import { SlantState } from './state';
 const DESCRIPTION = 'a2a0f2b4c3c0c';
 
 const line = (x: number, y: number, slash: Slash): SquareChange => ({ x, y, slash });
-const has = (state: SlantState, c: SquareChange) => state.slashes[c.y * state.w + c.x] === c.slash;
+const has = (state: SlantedState, c: SquareChange) => state.slashes[c.y * state.w + c.x] === c.slash;
 
 /** The swipe hint for one slash: across its square, from one end to the other. */
-function swipeHint(c: SquareChange, note?: string): SlantHint {
+function swipeHint(c: SquareChange, note?: string): SlantedHint {
   const path =
     c.slash === BACKSLASH
       ? [{ x: c.x, y: c.y }, { x: c.x + 1, y: c.y + 1 }]
@@ -32,7 +32,7 @@ function swipeHint(c: SquareChange, note?: string): SlantHint {
  * A step: draw these slashes, one swipe each. The hint shows the next one
  * still to draw, so the player is guided square by square.
  */
-function draw(text: string, ...wanted: SquareChange[]): TutorialStep<SlantState, SlantMove, SlantHint> {
+function draw(text: string, ...wanted: SquareChange[]): TutorialStep<SlantedState, SlantedMove, SlantedHint> {
   return {
     text,
     hint: (state) => {
@@ -52,7 +52,7 @@ const LOOP_SQUARE = { x: 1, y: 1 };
  * a 3, then a line that closes a loop (drawn, recognised and removed),
  * then the rest of the puzzle alone.
  */
-export const slantTutorial: Tutorial<SlantParams, SlantState, SlantMove, SlantHint> = {
+export const slantedTutorial: Tutorial<SlantedParams, SlantedState, SlantedMove, SlantedHint> = {
   params: { w: 4, h: 4, difficulty: EASY },
   description: DESCRIPTION,
   steps: [

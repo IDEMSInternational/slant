@@ -8,12 +8,12 @@ export type SolverResult = 'solved' | 'ambiguous' | 'impossible';
 class Impossible extends Error {}
 
 /**
- * Solves a Slant puzzle by deduction, porting slant_solve() from the
+ * Solves a Slanted puzzle by deduction, porting slant_solve() from the
  * original. Easy uses only clue counting and simple loop avoidance; Hard
  * adds dead-end avoidance and reasoning about squares that must slant the
  * same way. `slashes` receives the (possibly partial) solution.
  */
-export function solveSlant(
+export function solveSlanted(
   size: Size,
   clues: Int8Array,
   difficulty: number,

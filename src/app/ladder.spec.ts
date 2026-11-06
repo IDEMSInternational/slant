@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LEGAL_VERSION } from '@studio/container/legal';
 import { PuzzleScreens } from '@studio/container/puzzle-screens';
-import { SlantMove } from '../games/slant/moves';
-import { SlantParams } from '../games/slant/params';
-import { SlantState } from '../games/slant/state';
+import { SlantedMove } from '../games/slanted/moves';
+import { SlantedParams } from '../games/slanted/params';
+import { SlantedState } from '../games/slanted/state';
 import { App } from './app';
 
-type Screens = PuzzleScreens<SlantParams, SlantState, SlantMove, unknown>;
+type Screens = PuzzleScreens<SlantedParams, SlantedState, SlantedMove, unknown>;
 
 /** The ladder in a game with difficulties: it asks for one first. */
-describe('Ladder (Slant)', () => {
+describe('Ladder (Slanted)', () => {
   let fixture: ComponentFixture<App>;
   let screens: Screens;
   let element: HTMLElement;
 
   beforeEach(async () => {
     localStorage.clear();
-    localStorage.setItem('slant.noticeSeen', LEGAL_VERSION);
-    localStorage.setItem('slant.tutorialSeen', '1');
+    localStorage.setItem('slanted.noticeSeen', LEGAL_VERSION);
+    localStorage.setItem('slanted.tutorialSeen', '1');
     history.replaceState(null, '');
     await TestBed.configureTestingModule({ imports: [App] }).compileComponents();
     fixture = TestBed.createComponent(App);
@@ -37,7 +37,7 @@ describe('Ladder (Slant)', () => {
   }
 
   it('asks for Easy or Hard, then climbs every size at it', async () => {
-    localStorage.setItem('slant.ladder.best', JSON.stringify({ 1: 754_000 }));
+    localStorage.setItem('slanted.ladder.best', JSON.stringify({ 1: 754_000 }));
     await openSheet();
     expect(text('.chooser p')).toBe('Choose a difficulty');
     expect(texts('.chooser .level .name')).toEqual(['Easy', 'Hard']);

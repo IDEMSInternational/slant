@@ -1,11 +1,11 @@
 import { PuzzleGame } from '@studio/engine/puzzle-game';
 import { decodeDescription, validateDescription } from './description';
-import { generateSlant } from './generator/generate';
-import { SlantMove, applyMove } from './moves';
+import { generateSlanted } from './generator/generate';
+import { SlantedMove, applyMove } from './moves';
 import {
   DIFFICULTIES,
   HARD,
-  SlantParams,
+  SlantedParams,
   customFields,
   customParams,
   daily,
@@ -16,16 +16,17 @@ import {
   validateParams,
 } from './params';
 import { decodeSolution } from './solution';
-import { solveSlant } from './solver/solver';
-import { SlantState } from './state';
+import { solveSlanted } from './solver/solver';
+import { SlantedState } from './state';
 
 /**
- * Slant (also known as Gokigen Naname): draw a diagonal in every square so
- * that each numbered point touches that many lines, with no closed loops.
+ * Slanted, our version of the puzzle Slant (also known as Gokigen Naname):
+ * draw a diagonal in every square so that each numbered point touches that
+ * many lines, with no closed loops.
  */
-export const slantGame: PuzzleGame<SlantParams, SlantState, SlantMove> = {
-  id: 'slant',
-  name: 'Slant',
+export const slantedGame: PuzzleGame<SlantedParams, SlantedState, SlantedMove> = {
+  id: 'slanted',
+  name: 'Slanted',
 
   defaultParams,
   presets,
@@ -39,7 +40,7 @@ export const slantGame: PuzzleGame<SlantParams, SlantState, SlantMove> = {
   difficultyOf: (params) => params.difficulty,
   withDifficulty: (params, difficulty) => ({ ...params, difficulty }),
 
-  generate: generateSlant,
+  generate: generateSlanted,
   validateDescription: (params, description) => validateDescription(params, description),
 
   newGame(params, description) {
@@ -66,6 +67,6 @@ export const slantGame: PuzzleGame<SlantParams, SlantState, SlantMove> = {
     }
     // No stored solution (e.g. a puzzle typed in by hand): use the solver.
     const slashes = new Int8Array(initial.w * initial.h);
-    return solveSlant(initial, initial.clues, HARD, slashes) === 'solved' ? { kind: 'solve', slashes } : null;
+    return solveSlanted(initial, initial.clues, HARD, slashes) === 'solved' ? { kind: 'solve', slashes } : null;
   },
 };

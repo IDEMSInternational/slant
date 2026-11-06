@@ -1,8 +1,8 @@
 import { Dsf } from '@studio/engine/algorithms/dsf';
 import { EMPTY, NO_CLUE, Size, pointDegree, slashEnds } from './grid';
 
-/** A position in a game of Slant. Treated as immutable. */
-export interface SlantState extends Size {
+/** A position in a game of Slanted. Treated as immutable. */
+export interface SlantedState extends Size {
   /** Clue per grid point, (w+1) × (h+1), or NO_CLUE. */
   readonly clues: Int8Array;
   /** Slash per square: BACKSLASH, FORWARD or EMPTY. */

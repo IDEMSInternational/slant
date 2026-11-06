@@ -2,7 +2,7 @@ import { Dsf } from '@studio/engine/algorithms/dsf';
 import { EMPTY, Size, slashEnds } from '../grid';
 
 /**
- * Colours the lines on a Slant board by connected group: lines that touch
+ * Colours the lines on a Slanted board by connected group: lines that touch
  * form one group, and each group gets a palette colour.
  *
  * Colours are kept stable while playing: a group keeps the colour most of

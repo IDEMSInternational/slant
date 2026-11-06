@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import { placeLabel } from '@studio/container/board-label';
 import { EMPTY, NO_CLUE } from '../grid';
-import { SlantHint } from '../hint';
-import { Point, SlantStroke } from '../input';
-import { SlantMove, SquareChange } from '../moves';
-import { SlantState } from '../state';
+import { SlantedHint } from '../hint';
+import { Point, SlantedStroke } from '../input';
+import { SlantedMove, SquareChange } from '../moves';
+import { SlantedState } from '../state';
 import { findMistakes } from '../mistakes';
 import { LineColours } from './line-colours';
 
@@ -24,30 +24,30 @@ interface Segment {
   y2: number;
 }
 
-/** Number of line colours defined in slant-board.scss (--line-0 ... --line-9). */
+/** Number of line colours defined in slanted-board.scss (--line-0 ... --line-9). */
 const LINE_COLOURS = 10;
 /** Space around the board for clues on its edge, in squares. */
 const MARGIN = 0.45;
 
-/** Board for Slant, drawn as SVG in square units. Emits moves; never changes state itself. */
+/** Board for Slanted, drawn as SVG in square units. Emits moves; never changes state itself. */
 @Component({
-  selector: 'slant-board',
-  templateUrl: './slant-board.html',
-  styleUrl: './slant-board.scss',
+  selector: 'slanted-board',
+  templateUrl: './slanted-board.html',
+  styleUrl: './slanted-board.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlantBoard {
-  readonly state = input.required<SlantState>();
+export class SlantedBoard {
+  readonly state = input.required<SlantedState>();
   /** Tutorial guidance: highlights squares and animates the gesture. */
-  readonly hint = input<SlantHint | null>(null);
+  readonly hint = input<SlantedHint | null>(null);
   /** Thinking mode: swipes draw dotted, tentative lines. */
   readonly thinking = input(false);
   /** Show mistakes: lines on closed loops, and numbers that can't be satisfied, in red. */
   readonly showMistakes = input(false);
-  readonly move = output<SlantMove>();
+  readonly move = output<SlantedMove>();
 
   private readonly svg = viewChild.required<ElementRef<SVGSVGElement>>('svg');
-  private stroke: SlantStroke | null = null;
+  private stroke: SlantedStroke | null = null;
   /** Slashes being drawn by the current swipe. */
   protected readonly pending = signal<readonly SquareChange[]>([]);
 
@@ -142,7 +142,7 @@ export class SlantBoard {
     if (event.button !== 0) return;
     event.preventDefault();
     this.svg().nativeElement.setPointerCapture(event.pointerId);
-    this.stroke = new SlantStroke(this.state(), this.boardPoint(event), this.thinking());
+    this.stroke = new SlantedStroke(this.state(), this.boardPoint(event), this.thinking());
   }
 
   protected onPointerMove(event: PointerEvent): void {

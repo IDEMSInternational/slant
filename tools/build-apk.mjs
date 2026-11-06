@@ -1,4 +1,4 @@
-// Builds an installable debug APK at ./Slant.apk.
+// Builds an installable debug APK at ./Slanted.apk.
 // Needs JDK 21 (JAVA_HOME) and the Android SDK (ANDROID_HOME or android/local.properties).
 import { execSync } from 'node:child_process';
 import { copyFileSync } from 'node:fs';
@@ -12,5 +12,5 @@ const run = (command, cwd = root) => execSync(command, { cwd, stdio: 'inherit' }
 run('npx ng build');
 run('npx cap sync android');
 run(`${gradlew} assembleDebug`, android);
-copyFileSync(join(android, 'app/build/outputs/apk/debug/app-debug.apk'), join(root, 'Slant.apk'));
-console.log('\nAPK ready: Slant.apk');
+copyFileSync(join(android, 'app/build/outputs/apk/debug/app-debug.apk'), join(root, 'Slanted.apk'));
+console.log('\nAPK ready: Slanted.apk');

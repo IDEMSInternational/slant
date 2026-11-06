@@ -1,5 +1,5 @@
 import { EMPTY, Slash } from './grid';
-import { SlantState, isSolved } from './state';
+import { SlantedState, isSolved } from './state';
 
 export interface SquareChange {
   x: number;
@@ -9,7 +9,7 @@ export interface SquareChange {
   tentative?: boolean;
 }
 
-export type SlantMove =
+export type SlantedMove =
   /** Set some squares' slashes (EMPTY removes one). One swipe or tap = one move. */
   | { kind: 'set'; changes: readonly SquareChange[] }
   /** Thinking mode: make every dotted line solid (the hypothesis held). */
@@ -20,7 +20,7 @@ export type SlantMove =
   | { kind: 'solve'; slashes: Int8Array };
 
 /** Applies a move, returning a new state, or null if the move is invalid or changes nothing. */
-export function applyMove(state: SlantState, move: SlantMove): SlantState | null {
+export function applyMove(state: SlantedState, move: SlantedMove): SlantedState | null {
   const { w, h } = state;
   const slashes = state.slashes.slice();
   const tentative = state.tentative.slice();

@@ -1,8 +1,12 @@
-# Slant
+# Slanted
 
 An educational phone game from the IDEMS game studio, based on *Slant*
 (also known as Gokigen Naname) from
 [Simon Tatham's Portable Puzzle Collection](https://www.chiark.greenend.org.uk/~sgtatham/puzzles/).
+
+The game is called **Slanted** because the App Store already has an app
+called Slant. The puzzle itself is still Slant, and the original C code in
+`tools/c-reference/` keeps that name.
 
 Draw a diagonal line in every square so that each numbered point touches
 exactly that many lines, without the lines forming a closed loop.
@@ -27,8 +31,8 @@ The shared engine and shell come from the
 **submodule**, so clone with:
 
 ```sh
-git clone --recurse-submodules https://github.com/IDEMSInternational/slant.git
-cd slant
+git clone --recurse-submodules https://github.com/IDEMSInternational/slanted.git
+cd slanted
 npm install
 ```
 
@@ -39,7 +43,7 @@ Run `npm install` here only, never inside `games-common-core`.
 npm start              # dev server at http://localhost:4200
 npm test               # unit tests, including 680 puzzles checked against the original
 npm run build          # production web build
-npm run apk            # Android debug APK -> Slant.apk
+npm run apk            # Android debug APK -> Slanted.apk
 ```
 
 `npm run apk` needs JDK 21 (`JAVA_HOME`) and the Android SDK (`ANDROID_HOME`,
@@ -76,7 +80,7 @@ instead: `git tag v0.1.0`.
 ## Layout
 
 ```
-src/games/slant/            the game: no Angular except board/
+src/games/slanted/          the game: no Angular except board/
   generator/                puzzle generation (random maze, then clues)
   solver/                   deduction solver (Easy and Hard techniques)
   state, moves, input, ...  rules and touch handling

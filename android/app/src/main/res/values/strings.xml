@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Slant</string>
-    <string name="title_activity_main">Slant</string>
-    <string name="package_name">international.idems.games.slant</string>
-    <string name="custom_url_scheme">international.idems.games.slant</string>
+    <string name="app_name">Slanted</string>
+    <string name="title_activity_main">Slanted</string>
+    <string name="package_name">international.idems.games.slanted</string>
+    <string name="custom_url_scheme">international.idems.games.slanted</string>
 </resources>

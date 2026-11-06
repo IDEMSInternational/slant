@@ -1,13 +1,13 @@
 import { BACKSLASH, EMPTY, FORWARD } from './grid';
 import { findMistakes } from './mistakes';
 import { decodeParams } from './params';
-import { slantGame as game } from './slant-game';
+import { slantedGame as game } from './slanted-game';
 
 const B = BACKSLASH;
 const F = FORWARD;
 const _ = EMPTY;
 
-describe('Slant mistakes', () => {
+describe('Slanted mistakes', () => {
   it('marks only the lines that form a closed loop', () => {
     // 3×2 with no clues: a diamond in the left 2×2, plus a stray line.
     const state = game.newGame(decodeParams('3x2de'), 'l');
