@@ -6,11 +6,11 @@
   @let s = screens;
   @if (s.tutorial(); as t) {
     <puzzle-tutorial [controls]="t" (skip)="s.endTutorial()">
-      <slant-board [state]="t.state()" [hint]="t.hint()" (move)="t.move($event)" />
+      <slanted-board [state]="t.state()" [hint]="t.hint()" (move)="t.move($event)" />
     </puzzle-tutorial>
   } @else if (s.play(); as play) {
     <puzzle-shell [controls]="play" (back)="s.goHome()" (help)="s.startTutorial()">
-      <slant-board
+      <slanted-board
         [state]="play.state()"
         [thinking]="thinking()"
         [showMistakes]="play.showMistakes()"

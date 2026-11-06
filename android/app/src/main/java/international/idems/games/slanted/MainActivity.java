@@ -1,4 +1,4 @@
-package international.idems.games.slant;
+package international.idems.games.slanted;
 
 import com.getcapacitor.BridgeActivity;
 

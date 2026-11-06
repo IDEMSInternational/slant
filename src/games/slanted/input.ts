@@ -1,6 +1,6 @@
 import { BACKSLASH, EMPTY, FORWARD, Size } from './grid';
-import { SlantMove, SquareChange } from './moves';
-import { SlantState } from './state';
+import { SlantedMove, SquareChange } from './moves';
+import { SlantedState } from './state';
 
 export interface Point {
   x: number;
@@ -21,7 +21,7 @@ const DIAGONAL = 0.4;
  * slashes are protected: they can't be redrawn or tapped away, so
  * discarding a hypothesis never loses work the player was sure of.
  */
-export class SlantStroke {
+export class SlantedStroke {
   private readonly size: Size;
   private readonly start: Point;
   private readonly thinking: boolean;
@@ -54,7 +54,7 @@ export class SlantStroke {
   }
 
   /** The move this touch makes when released, or null if it does nothing. */
-  finish(state: SlantState): SlantMove | null {
+  finish(state: SlantedState): SlantedMove | null {
     const square = this.drawn ?? this.squareAt(this.start);
     const i = square.y * this.size.w + square.x;
     const solid = state.slashes[i] !== EMPTY && !state.tentative[i];

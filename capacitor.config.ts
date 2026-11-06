@@ -1,9 +1,9 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'international.idems.games.slant',
+  appId: 'international.idems.games.slanted',
   appName: 'Slanted',
-  webDir: 'dist/slant/browser',
+  webDir: 'dist/slanted/browser',
   backgroundColor: '#f6f3ed', // the IDEMS Games background, behind the web view
 };
 

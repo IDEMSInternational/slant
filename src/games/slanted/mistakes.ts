@@ -1,8 +1,8 @@
 import { Dsf } from '@studio/engine/algorithms/dsf';
 import { EMPTY, NO_CLUE, Size, pointDegree, slashEnds } from './grid';
 
-/** What "Show mistakes" marks on a Slant board. */
-export interface SlantMistakes {
+/** What "Show mistakes" marks on a Slanted board. */
+export interface SlantedMistakes {
   /** 1 for each square whose line is part of a closed loop. */
   readonly loopSquares: Uint8Array;
   /** 1 for each clue point that can no longer be satisfied. */
@@ -10,10 +10,10 @@ export interface SlantMistakes {
 }
 
 /**
- * Finds rule-breaking parts of a Slant board. Dotted (thinking-mode)
+ * Finds rule-breaking parts of a Slanted board. Dotted (thinking-mode)
  * lines count like solid ones, since they count towards the solution.
  */
-export function findMistakes(state: Size & { clues: Int8Array; slashes: Int8Array }): SlantMistakes {
+export function findMistakes(state: Size & { clues: Int8Array; slashes: Int8Array }): SlantedMistakes {
   return { loopSquares: findLoopSquares(state, state.slashes), badClues: findBadClues(state) };
 }
 

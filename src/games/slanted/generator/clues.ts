@@ -2,7 +2,7 @@ import { RandomState } from '@studio/engine/random/random-state';
 import { shuffle } from '@studio/engine/random/shuffle';
 import { NO_CLUE, Size, pointDegree } from '../grid';
 import { EASY } from '../params';
-import { solveSlant } from '../solver/solver';
+import { solveSlanted } from '../solver/solver';
 
 /** Stage 2: a clue on every grid point, counting the lines that touch it. */
 export function allClues(size: Size, slashes: Int8Array): Int8Array {
@@ -39,7 +39,7 @@ export function removeClues(size: Size, clues: Int8Array, difficulty: number, ra
       if (removalPass !== pass) continue;
 
       clues[point] = NO_CLUE;
-      if (solveSlant(size, clues, difficulty) !== 'solved') clues[point] = clue; // put it back
+      if (solveSlanted(size, clues, difficulty) !== 'solved') clues[point] = clue; // put it back
     }
   }
 }

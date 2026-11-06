@@ -11,18 +11,18 @@ const DIFFICULTY_CODES = 'eh';
 const MIN_SIDE = 4;
 const MAX_SIDE = 15; // 20×20 Hard takes ~1 s on a PC, several on a phone
 
-export interface SlantParams {
+export interface SlantedParams {
   /** Size in squares; the clue points form a (w+1) × (h+1) grid. */
   w: number;
   h: number;
   difficulty: number;
 }
 
-export function defaultParams(): SlantParams {
+export function defaultParams(): SlantedParams {
   return { w: 6, h: 6, difficulty: EASY };
 }
 
-export function presets(): Preset<SlantParams>[] {
+export function presets(): Preset<SlantedParams>[] {
   const sizes = [[5, 5], [6, 6], [7, 7], [8, 8], [10, 10], [10, 12]];
   return sizes.map(([w, h]) => ({
     name: `${w}×${h}`,
@@ -36,7 +36,7 @@ export function presets(): Preset<SlantParams>[] {
  * to 10×12), and Hard is Hard puzzles (6×6 to 10×12). Changing this changes the daily puzzles
  * for everyone (see daily.ts in the engine).
  */
-export const daily: DailySchedule<SlantParams> = {
+export const daily: DailySchedule<SlantedParams> = {
   firstDay: '2026-10-24',
   levels: [
     { difficulty: EASY, sizes: [[5, 5], [5, 5], [6, 6], [6, 6], [6, 6], [7, 7], [7, 7]] },
@@ -46,11 +46,11 @@ export const daily: DailySchedule<SlantParams> = {
 };
 
 /** Text form, compatible with the original: "8x8de", "10x10dh". */
-export function encodeParams(params: SlantParams): string {
+export function encodeParams(params: SlantedParams): string {
   return `${params.w}x${params.h}d${DIFFICULTY_CODES[params.difficulty]}`;
 }
 
-export function decodeParams(text: string): SlantParams {
+export function decodeParams(text: string): SlantedParams {
   const params = defaultParams();
   const match = /^(\d*)(?:x(\d*))?(?:d(.?))?/.exec(text);
   if (!match) return params;
@@ -62,19 +62,19 @@ export function decodeParams(text: string): SlantParams {
   return params;
 }
 
-export function validateParams(params: SlantParams): string | null {
+export function validateParams(params: SlantedParams): string | null {
   if (params.w < 2 || params.h < 2) return 'Width and height must both be at least two';
   if (params.w * params.h > 10000) return 'Width times height must not be unreasonably large';
   return null;
 }
 
-export function customFields(params: SlantParams): CustomField[] {
+export function customFields(params: SlantedParams): CustomField[] {
   return [
     { key: 'w', label: 'Width', min: MIN_SIDE, max: MAX_SIDE, value: params.w },
     { key: 'h', label: 'Height', min: MIN_SIDE, max: MAX_SIDE, value: params.h },
   ];
 }
 
-export function customParams(values: Readonly<Record<string, number>>): SlantParams {
+export function customParams(values: Readonly<Record<string, number>>): SlantedParams {
   return { ...defaultParams(), w: values['w'], h: values['h'] };
 }

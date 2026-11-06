@@ -11,7 +11,7 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$HERE/../.." && pwd)"
 PUZZLES="${1:-$ROOT/../puzzles}"
 BUILD="$HERE/build"
-OUT="$ROOT/src/games/slant/testing/reference-puzzles.json"
+OUT="$ROOT/src/games/slanted/testing/reference-puzzles.json"
 
 mkdir -p "$BUILD" "$(dirname "$OUT")"
 gcc -O2 -std=c99 -I"$PUZZLES" -o "$BUILD/slant-reference" \

@@ -1,11 +1,11 @@
-// Draws Slant's app icon: a "3" clue with three blue lines meeting at it and
+// Draws Slanted's app icon: a "3" clue with three blue lines meeting at it and
 // a teal line beside it, on the board, in the game's own colours.
 //
 // Usage: node tools/make-icon.mjs   (then: npm run app-images)
 import { resolve } from 'node:path';
 import { makeAppIcon } from '../games-common-core/tools/make-app-icon.mjs';
 
-// Colours from theme.scss and slant-board.scss.
+// Colours from theme.scss and slanted-board.scss.
 const BOARD = '#fffdf8';
 const GRID = '#d9d3c5';
 const INK = '#22252b';

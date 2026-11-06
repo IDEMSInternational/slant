@@ -1,5 +1,5 @@
 /**
- * Conventions shared by the Slant modules, as in the original:
+ * Conventions shared by the Slanted modules, as in the original:
  *
  * - The board has w × h squares, indexed y * w + x.
  * - Clues sit on the (w+1) × (h+1) grid points, indexed y * (w+1) + x.

@@ -1,25 +1,25 @@
 import { TutorialRun } from '@studio/engine/tutorial';
 import { BACKSLASH, EMPTY, FORWARD } from './grid';
-import { SlantMove } from './moves';
+import { SlantedMove } from './moves';
 import { EASY } from './params';
-import { slantGame as game } from './slant-game';
-import { solveSlant } from './solver/solver';
-import { slantTutorial as tutorial } from './tutorial';
+import { slantedGame as game } from './slanted-game';
+import { solveSlanted } from './solver/solver';
+import { slantedTutorial as tutorial } from './tutorial';
 
-const set = (x: number, y: number, slash: number): SlantMove => ({
+const set = (x: number, y: number, slash: number): SlantedMove => ({
   kind: 'set',
   changes: [{ x, y, slash: slash as -1 | 0 | 1 }],
 });
 
-describe('Slant tutorial', () => {
+describe('Slanted tutorial', () => {
   it('uses a puzzle that the Easy solver solves uniquely', () => {
     const initial = game.newGame(tutorial.params, tutorial.description);
-    expect(solveSlant(initial, initial.clues, EASY)).toBe('solved');
+    expect(solveSlanted(initial, initial.clues, EASY)).toBe('solved');
   });
 
   it('can be played through from start to finish, one square per swipe', () => {
     const run = new TutorialRun(game, tutorial);
-    const play = (move: SlantMove, result = 'applied') => {
+    const play = (move: SlantedMove, result = 'applied') => {
       expect(run.move(move)).toBe(result);
       if (result === 'step-done') run.next();
     };
