@@ -1,0 +1,31 @@
+# Builds the app and uploads it to TestFlight, with the iOS release shared by
+# every IDEMS game (games-common-core/ios-release/README.md). Start it by hand
+# from the Actions tab, after `npm version` and `git push --follow-tags`.
+name: iOS - Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Where to deploy'
+        required: true
+        default: testflight
+        type: choice
+        options:
+          - testflight
+      allow_provisioning_changes:
+        description: 'Let fastlane match create or renew the provisioning profile (needed on the first run)'
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    uses: IDEMSInternational/games-common-core/.github/workflows/ios-release.yml@main
+    with:
+      target: ${{ inputs.target }}
+      allow_provisioning_changes: ${{ inputs.allow_provisioning_changes }}
+    secrets: inherit
