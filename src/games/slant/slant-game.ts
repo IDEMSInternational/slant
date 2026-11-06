@@ -25,7 +25,7 @@ import { SlantState } from './state';
  */
 export const slantGame: PuzzleGame<SlantParams, SlantState, SlantMove> = {
   id: 'slant',
-  name: 'Slant',
+  name: 'Slanted',
 
   defaultParams,
   presets,

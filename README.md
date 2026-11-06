@@ -1,8 +1,13 @@
-# Slant
+# Slanted
 
 An educational phone game from the IDEMS game studio, based on *Slant*
 (also known as Gokigen Naname) from
 [Simon Tatham's Portable Puzzle Collection](https://www.chiark.greenend.org.uk/~sgtatham/puzzles/).
+
+Players know it as **Slanted**, its name in the app stores and on their
+phones, because the App Store already has an app called Slant. The code and
+this repository still call it Slant, after the puzzle, and its App ID is
+`international.idems.games.slant`.
 
 Draw a diagonal line in every square so that each numbered point touches
 exactly that many lines, without the lines forming a closed loop.

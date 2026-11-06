@@ -24,7 +24,7 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
-    expect(element.querySelector('h1')?.textContent).toContain('How to play Slant');
+    expect(element.querySelector('h1')?.textContent).toContain('How to play Slanted');
     expect(element.querySelector('slant-board svg')).toBeTruthy();
     expect(element.querySelectorAll('.clue').length).toBe(6);
     expect(element.querySelector('puzzle-splash img')?.getAttribute('src')).toBe('studio/idems-games-logo.jpg');
